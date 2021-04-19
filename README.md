@@ -1,2 +1,10 @@
 # Agricultural-Interview-Analysis
-Utilize NLP to predict the speaker of climate change related passages from interviews with farmers and experts in Vermont and Maine
+Utilize NLP to predict the speaker of climate change related passages from interviews with farmers and experts in Vermont and Maine.
+
+Code is organized as follows:
+
+Interview Read-in Script contains functionality to process the raw word documents representing the interviews into text files separated by who is speaking and the state they come from. Directory names will have to be modified for your computer. In the directory I run all three scripts from, I have two folders for each of the Vermont and Maine transcripts, each with two of their own folders for expert vs farmer. If you would like, I can send the .docx versions of the interviews (works better for the python library I use to process them), or you can convert them automatically using the function I wrote.
+
+Text Processing contains the NLP pipeline to convert the raw text into dataframes containing sentences spoken by experts/farmers. Each step of my process (i.e. lemmatization, removing short words) is clearly noted in the notebook. The final output of this notebook is two .csvs. One contains passages with a match term inside of them, while the other is a control dataset and simply contains random passages from the text. Both are processed in the same way, and all passages are labeled with a 0/1 classifying them as being spoken by a farmer (1) or expert (0). I did some experimenting and so there are multiple code cells that read out to csvs. I call the first pair data_nopron.csv because I tested the removal of the PRON term that spaCy's nlp() function converts pronouns to. The last code block reads out csvs containing word embedding vectors of the same passages, another idea I experimented with. 
+
+Speaker Classification Modeling implements the models I used, where I try CountVectorizer, TfIdfVectorizer, and word embeddings as preprocessors to feed into models such as Logistic Regression, Random Forest, and SVM. This script may be difficult to read because in the interest of saving space, I reran the same model code blocks with a different set of preprocessing steps. The results I found were from the CountVectorizer preprocessing with each of the three models mentioned previously.
